@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { SearchContextProvider } from '@backstage/plugin-search-react';
 import {
   Content,
@@ -6,11 +6,12 @@ import {
   InfoCard,
   WarningPanel,
   CodeSnippet,
-  StatusOK,
   StatusError,
+  StatusOK,
 } from '@backstage/core-components';
 import {
   CircularProgress,
+  createTheme,
   Grid,
   makeStyles,
   Typography,
@@ -43,6 +44,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     padding: '8px 0',
     margin: 'auto',
+    fontSize: '50px !important',
   },
 }));
 
@@ -66,6 +68,9 @@ const useCatalogStyles = makeStyles({
   subheader: {
     display: 'block',
     width: '100%',
+    '& .MuiTypography-body1': {
+      fontSize: '50px !important',
+    },
   },
   link: {
     '&:hover': {
@@ -73,6 +78,18 @@ const useCatalogStyles = makeStyles({
     },
   },
 });
+
+const theme = createTheme({
+  overrides: {
+    MuiTypography: {
+      body1: {
+        'font-size': '50px',
+      },
+    },
+  },
+});
+
+const useStyles2 = makeStyles({});
 
 const CatalogClusters = () => {
   const catalogApi = useApi(catalogApiRef);
@@ -137,6 +154,7 @@ const CatalogClusters = () => {
             entityRef={clusterEntity.entity}
             className={classes.link}
           >
+            <Typography />
             <InfoCard
               divider={false}
               noPadding
@@ -144,7 +162,7 @@ const CatalogClusters = () => {
               title={
                 <div className={classes.subheader}>
                   {clusterEntity.status === true ? (
-                    <StatusOK />
+                    <StatusOK children={<p>test</p>} />
                   ) : (
                     <StatusError />
                   )}

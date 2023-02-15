@@ -109,3 +109,9 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
     #     - allow: [User, Group]
+
+ocm:
+  hub:
+    name: infra
+    url: https://api.moc-infra.massopen.cloud:6443
+    serviceAccountToken: ${moc_infra_token}
